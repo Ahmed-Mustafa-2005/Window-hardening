@@ -1,107 +1,66 @@
-# 🛡️ Windows System Security Hardening Tool
+﻿Dynamic Security Monitor (v1.0)
+Project Overview
+Dynamic Security Monitor is a comprehensive system hardening and monitoring utility for the Windows operating system, developed in C# using Windows Forms. This tool provides real-time security status monitoring, on-demand vulnerability scanning, and active system management capabilities through a clean, modern, multi-tabbed interface.
+The project was developed to provide system administrators, IT professionals, and security-conscious users with a centralized dashboard to proactively identify, analyze, and remediate common security misconfigurations and threats.
 
-A lightweight Windows desktop application designed to assess and improve the security posture of Windows systems. This tool performs real-time monitoring, scans for common security misconfigurations, and assists users in hardening their systems against potential threats.
+Key Features
+The tool is organized into a five-tab layout for clear and intuitive navigation:
 
-## 🚀 Features
+1. System Status Dashboard
+    A live dashboard that continuously monitors critical system settings and provides at-a-glance status using color-coded cards.
 
-- ✅ **Firewall Status Checker**  
-Check, verify, and optionally enable the firewall for Public, Private, and Domain profiles.
+    Windows Firewall: Monitors Public, Private, and Domain profiles.
 
-- 🛡️ **Antivirus & Windows Defender Monitor**  
-Check if Windows Defender is active, real-time protection is enabled, and initiate manual scans.
+    Antivirus: Checks for an active and running AV solution via WMI.
 
-- 💾 **DEP (Data Execution Prevention) Status Checker**  
-Verify whether DEP is enabled to protect against memory-based attacks.
+    User Account Control (UAC): Ensures UAC is enabled and not set to an insecure "auto-approve" level.
 
-- 🧾 **Registry Integrity Checker**  
-Identify risky registry modifications that can compromise system security.
+    Data Execution Prevention (DEP): Reports the active DEP policy.
 
-- ⚠️ **Unquoted Service Path Monitor**  
-Detect services vulnerable to privilege escalation due to unquoted file paths.
+Live Notifications: Triggers desktop alerts if a monitored setting becomes insecure.
 
-- 🔒 **UAC (User Account Control) Status Check**  
-Check if UAC is enabled, preventing unauthorized elevation.
+2. Vulnerability Scanners
+Contains tools for finding common privilege escalation vectors.
 
-- 🚀 **Startup Program Auditor**  
-Detect suspicious startup programs that could indicate malware persistence.
+Unquoted Service Path Scanner: Detects and provides a one-click fix for services with unquoted executable paths.
 
-- 🔄 **Windows Update Monitor**  
-Verify update status and ensure the system is patched with the latest security fixes.
+3. Startup Manager
+A powerful utility to inspect and manage programs that launch automatically on system boot.
 
-- 🧪 **Virus Scan Trigger**  
-Launch an on-demand Windows Defender quick scan directly from the tool.
+Comprehensive Scan: Scans all common registry keys and startup folders for both the current user and all users.
 
-## 🖥️ GUI Overview
+Disable Functionality: Allows users to select and permanently disable unwanted or suspicious startup items.
 
-- Built with **Windows Forms (WinForms)** using C# in Visual Studio.
-- Clean interface with functional buttons for each security module.
-- Real-time scan results displayed in a RichTextBox with color-coded icons for easy understanding.
+4. Virus & Threat Scan
+Provides an interface for on-demand threat scanning.
 
-## 📸 Screenshots
+Windows Defender Integration: Launches a silent "Quick Scan" using the built-in Windows Defender command-line tool.
 
-> _Include screenshots of the GUI here._
+Progress Feedback: Displays the scan status to the user.
 
-## 🔧 Installation
+5. Windows Update & Version
+Offers tools to analyze the system's patch level and version.
 
-1. Clone or download this repository.
-2. Open the solution (`SecurityToolApp.sln`) in **Visual Studio**.
-3. Build the solution (`Ctrl + Shift + B`).
-4. Run the application (`F5`) or compile it into an executable from Visual Studio.
+Accurate OS Versioning: Uses the systeminfo command and WMI to get the correct OS name, build number, and patch history.
 
-## 📂 File Structure
+Patch Recency Analysis: Analyzes the install dates of security hotfixes to determine if the system is actively patched.
 
-| File/Folder               | Description                                  |
-|---------------------------|----------------------------------------------|
-| `Form1.cs`                | Main GUI and event handling                 |
-| `FirewallMonitor.cs`      | Firewall status and rules checking          |
-| `DefenderMonitor.cs`      | Antivirus and Defender status checker       |
-| `DepMonitor.cs`           | Data Execution Prevention check             |
-| `RegistryMonitor.cs`      | Registry integrity scanner                  |
-| `StartupProgramMonitor.cs`| Startup programs checker                    |
-| `UacMonitor.cs`           | UAC status validation                       |
-| `UnquotedServicePath.cs`  | Unquoted service path vulnerability checker |
-| `VirusScanMonitor.cs`     | Virus scan trigger using Defender           |
-| `WindowsUpdateMonitor.cs` | Windows Update status checker               |
+Update Check & Install: Checks for new available updates via the Windows Update Agent API and provides a button to open the Windows Update settings page.
 
-## 🔒 Requirements
+How to Run
+Navigate to the Releases page.
 
-- Windows 10/11
-- .NET Framework 4.7.2 or higher
-- Administrator privileges (for certain checks and remediation)
+Download the latest release archive (DynamicSecurityMonitor.zip).
 
-## 💻 Technologies Used
+Extract the contents.
 
-- **C#**
-- **Windows Forms (WinForms)**
-- **Windows Management Instrumentation (WMI)**
-- **PowerShell (for underlying system commands)**
-- **Windows Security Center APIs**
+Ensure DynamicSecurityMonitor.exe and DynamicSecurityMonitor.exe.config are in the same folder.
 
-## 🚦 How to Use
+Right-click DynamicSecurityMonitor.exe and select "Run as administrator" or double-click and approve the UAC prompt.
 
-1. Launch the application.
-2. Click any of the functional buttons to run security checks:
-   - Example: 🔥 Click **Firewall Check** to verify firewall status.
-3. Results are displayed in the output pane below.
-4. Use the insights to fix security misconfigurations manually or through recommended steps.
+Technical Details
+Language: C# (.NET Framework)
 
-## 🎯 Future Scope
+Platform: Windows Forms (WinForms)
 
-- 🔔 Real-time system tray alerts for detected issues.
-- 📝 Export scan results to PDF/HTML reports.
-- 🔄 Auto-fix for selected high-risk vulnerabilities.
-- 🌐 Remote monitoring capabilities for enterprise environments.
-
-## 🤝 Contributing
-
-Contributions, suggestions, or improvements are welcome! Feel free to open an issue or submit a pull request.
-
-## 🛡️ Disclaimer
-
-This tool is designed for educational and security assessment purposes. The author is not responsible for any misuse or damage caused by this tool.
-
----
-
-## 📜 License
-
-[MIT License](LICENSE)
+Core APIs Used: WMI, Windows Registry, Windows Update Agent API (WUApiLib), .NET Process and File System APIs.
